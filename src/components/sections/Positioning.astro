@@ -1,0 +1,50 @@
+---
+import Section from '../ui/Section.astro';
+import { FadeIn } from '../ui/FadeIn';
+---
+
+<Section id="positioning" class="section-spacing relative overflow-hidden">
+  <!-- Subtle gradient instead of hard background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-lumo-brand/2 to-transparent opacity-50 pointer-events-none"></div>
+  
+  <div class="relative z-10 max-w-4xl mx-auto text-center mb-16">
+    <FadeIn client:visible>
+        <h2 class="text-3xl md:text-4xl font-medium text-white mb-6">
+          Sua operação, suas regras.
+        </h2>
+        <p class="text-lg text-lumo-text-secondary max-w-2xl mx-auto">
+          Não é um SaaS rígido. É uma parceria operacional que moldamos para o seu negócio.
+        </p>
+    </FadeIn>
+  </div>
+
+  <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <FadeIn client:visible delay={0.1}>
+        <div class="text-center p-6 border-l border-white/10 hover:border-lumo-brand/50 transition-colors">
+            <h3 class="text-lg font-medium text-white mb-2">Setup Colaborativo</h3>
+            <p class="text-sm text-lumo-text-secondary">
+              Mapeamos juntos o plano de contas e workflows de aprovação antes de ligar a chave.
+            </p>
+        </div>
+      </FadeIn>
+
+      <FadeIn client:visible delay={0.2}>
+        <div class="text-center p-6 border-l border-white/10 hover:border-lumo-brand/50 transition-colors">
+            <h3 class="text-lg font-medium text-white mb-2">Agnóstico à Complexidade</h3>
+            <p class="text-sm text-lumo-text-secondary">
+              Múltiplos centros de custo? Tags de projeto? Rateio? A Lumo aprende e executa.
+            </p>
+        </div>
+      </FadeIn>
+
+      <FadeIn client:visible delay={0.3}>
+        <div class="text-center p-6 border-l border-white/10 hover:border-lumo-brand/50 transition-colors">
+            <h3 class="text-lg font-medium text-white mb-2">Evolução Contínua</h3>
+            <p class="text-sm text-lumo-text-secondary">
+              O agente fica mais inteligente com o tempo, absorvendo novas regras conforme você escala.
+            </p>
+        </div>
+      </FadeIn>
+  </div>
+
+</Section>

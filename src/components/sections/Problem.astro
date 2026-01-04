@@ -1,0 +1,74 @@
+---
+import Section from '../ui/Section.astro';
+import { FadeIn } from '../ui/FadeIn';
+---
+
+<Section id="problem" class="section-spacing border-t border-white/5 relative overflow-hidden">
+  <!-- Dynamic Background: Dark Red/Orange hint for "Problem" state -->
+  <div class="absolute inset-0 w-full h-full pointer-events-none">
+     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-red-500/5 rounded-full blur-[150px]"></div>
+     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.8)_100%)]"></div>
+  </div>
+  
+  <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+    <!-- Left Column: Sticky Content -->
+    <div class="lg:col-span-5 lg:sticky lg:top-32">
+        <FadeIn client:visible>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500/80"></span>
+            <span class="text-xs font-semibold text-white/70 tracking-wider uppercase">O Gargalo</span>
+          </div>
+          
+          <h2 class="text-3xl md:text-4xl font-medium text-white mb-6 leading-tight">
+            A armadilha da<br/> 
+            <span class="text-white/50">execução manual.</span>
+          </h2>
+          <p class="text-lg text-lumo-text-secondary leading-relaxed max-w-sm">
+            Seu time foi contratado para estratégia, mas passa 80% do tempo preenchendo formulários na Omie.
+          </p>
+        </FadeIn>
+    </div>
+
+    <!-- Right Column: Bento Grid of Pain Points -->
+    <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+      
+      <!-- Big Card -->
+      <FadeIn client:visible delay={0.1} className="md:col-span-2">
+        <div class="group h-full p-8 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] hover:border-red-500/20 transition-all duration-300">
+          <div class="flex items-start justify-between mb-4">
+             <div class="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 group-hover:text-red-300 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+             </div>
+          </div>
+          <h3 class="text-xl font-medium text-white mb-2">Micro-gestão forçada</h3>
+          <p class="text-lumo-text-secondary leading-relaxed">
+             Líderes financeiros perdem horas preciosas revisando input manual, conciliação bancária e agendamentos linha a linha para evitar erros críticos.
+          </p>
+        </div>
+      </FadeIn>
+
+      <!-- Small Card 1 -->
+      <FadeIn client:visible delay={0.2}>
+        <div class="group h-full p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] hover:border-red-500/20 transition-all duration-300">
+           <div class="p-3 w-fit rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 mb-4">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+           </div>
+           <h3 class="text-lg font-medium text-white mb-2">Retrabalho Constante</h3>
+           <p class="text-sm text-lumo-text-secondary">Processos manuais geram erros inevitáveis que exigem correções infinitas.</p>
+        </div>
+      </FadeIn>
+
+      <!-- Small Card 2 -->
+      <FadeIn client:visible delay={0.3}>
+        <div class="group h-full p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] hover:border-red-500/20 transition-all duration-300">
+           <div class="p-3 w-fit rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 mb-4">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+           </div>
+           <h3 class="text-lg font-medium text-white mb-2">Escala = Headcount</h3>
+           <p class="text-sm text-lumo-text-secondary">Crescer significa contratar mais juniors apenas para absorver volume.</p>
+        </div>
+      </FadeIn>
+
+    </div>
+  </div>
+</Section>

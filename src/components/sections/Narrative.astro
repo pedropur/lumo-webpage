@@ -1,0 +1,61 @@
+---
+import Section from '../ui/Section.astro';
+import { FadeIn } from '../ui/FadeIn';
+---
+
+<Section id="trust" class="section-spacing relative px-6 sm:px-8 lg:px-12">
+  <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <!-- Left Column: Narrative -->
+    <FadeIn client:visible>
+      <div>
+        <h2 class="text-3xl md:text-4xl font-medium text-white mb-8 leading-tight">
+          Crescimento<br/> 
+          <span class="text-white/50">sem inflar o time.</span>
+        </h2>
+        <div class="space-y-6 text-lg text-lumo-text-secondary leading-relaxed">
+          <p>
+            O volume financeiro cresce exponencialmente. Sua capacidade humana cresce linearmente (e custa caro).
+          </p>
+          <ul class="space-y-4 mt-8">
+            <li class="flex items-start gap-3">
+               <span class="w-1.5 h-1.5 rounded-full bg-white/30 mt-2.5"></span>
+               <span><strong class="text-white font-medium">O jeito antigo:</strong> Contratar estagiários para "apagar incêndio" operacional.</span>
+            </li>
+            <li class="flex items-start gap-3">
+               <span class="w-1.5 h-1.5 rounded-full bg-lumo-brand mt-2.5 shadow-[0_0_8px_rgba(255,200,44,0.5)]"></span>
+               <span><strong class="text-lumo-brand font-medium">O jeito Lumo:</strong> Um agente que escala infinitamente. Seu time foca em estratégia.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </FadeIn>
+
+    <!-- Right Column: Quote Card -->
+    <FadeIn client:visible delay={0.2}>
+      <div class="relative group">
+        <!-- Glow effect -->
+        <div class="absolute -inset-1 bg-gradient-to-r from-lumo-brand/20 to-white/10 rounded-2xl blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+        
+        <div class="relative bg-[#0A0A0A] border border-white/10 p-8 md:p-10 rounded-2xl shadow-2xl">
+          <div class="absolute top-0 right-0 p-6 opacity-10">
+             <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H19.017C21.2261 5 23.017 6.79086 23.017 9V15C23.017 17.2091 21.2261 19 19.017 19H14.017V21ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H10.0166C12.2257 5 14.0166 6.79086 14.0166 9V15C14.0166 17.2091 12.2257 19 10.0166 19H5.0166V21Z"/></svg>
+          </div>
+          
+          <blockquote class="text-xl md:text-2xl font-light text-white leading-relaxed mb-8 relative z-10">
+            "No primeiro mês, limpamos 80% do backlog de conciliação no fim de semana. Foi como contratar um analista sênior que trabalhou 48h seguidas sem errar."
+          </blockquote>
+          
+          <div class="flex items-center gap-4 pt-6 border-t border-white/5">
+            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black font-bold text-sm">
+              DF
+            </div>
+            <div>
+              <div class="text-base font-semibold text-white">Diretor Financeiro</div>
+              <div class="text-sm text-lumo-text-secondary">SaaS B2B, Series B</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </FadeIn>
+  </div>
+</Section>

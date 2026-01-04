@@ -1,0 +1,30 @@
+---
+import Section from '../ui/Section.astro';
+import { FadeIn } from '../ui/FadeIn';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-black border-t border-white/10">
+  <Section class="py-12 md:py-16">
+    <FadeIn client:visible>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="col-span-1">
+          <img src="/assets/logo.png" alt="Lumo Logo" class="h-7 w-auto mb-4 opacity-80" />
+          <p class="text-sm text-lumo-text-secondary">
+            Inteligência artificial para operações financeiras no Omie.
+          </p>
+        </div>
+        <div class="col-span-1 md:col-span-2"></div>
+
+      </div>
+      
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-lumo-text-muted">
+        <p>&copy; {currentYear} Lumo Tecnologia Ltda. Todos os direitos reservados.</p>
+        <p class="mt-2 md:mt-0 flex items-center gap-1">
+          Feito em São Paulo <span class="text-lumo-brand">🇧🇷</span>
+        </p>
+      </div>
+    </FadeIn>
+  </Section>
+</footer>

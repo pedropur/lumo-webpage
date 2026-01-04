@@ -1,0 +1,47 @@
+---
+import Button from './Button.astro';
+---
+
+<header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 pointer-events-none">
+  <div id="sticky-header" class="w-full border-b border-transparent transition-all duration-300 bg-black/0 backdrop-blur-0">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div class="flex items-center justify-between h-20 pointer-events-auto">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 group transition-opacity hover:opacity-80">
+          <img src="/assets/logo.png" alt="Lumo" class="h-7 w-auto" />
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-10">
+          <a href="#contact" class="text-sm font-medium text-lumo-text-secondary hover:text-white transition-colors">
+            Login
+          </a>
+          <Button href="#contact" variant="primary" class="!px-5 !py-2.5 text-sm">
+            Saiba mais
+          </Button>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-button" class="md:hidden text-white p-2" aria-label="Toggle menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('sticky-header');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('bg-black/80', 'backdrop-blur-md', 'border-white/10');
+      header?.classList.remove('border-transparent', 'bg-black/0');
+    } else {
+      header?.classList.remove('bg-black/80', 'backdrop-blur-md', 'border-white/10');
+      header?.classList.add('border-transparent', 'bg-black/0');
+    }
+  });
+</script>
