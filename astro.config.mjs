@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL,
+  site: process.env.SITE_URL ?? 'https://www.lumoai.com.br',
   integrations: [
     react(),
     tailwind({
