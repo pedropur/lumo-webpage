@@ -18,12 +18,27 @@ const {
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: light)" />
-    <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />
-    <!-- Fallback for browsers without media query support -->
-    <link rel="icon" type="image/png" href="/favicon-dark.png" />
+    <link id="favicon" rel="icon" type="image/png" href="/favicon-dark.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    
+    <script is:inline>
+      const favicon = document.getElementById('favicon');
+      const lightIcon = '/favicon-light.png'; // Active in Light Mode
+      const darkIcon = '/favicon-dark.png';   // Active in Dark Mode
+      
+      const updateFavicon = (event) => {
+        const isDark = event.matches;
+        favicon.href = isDark ? darkIcon : lightIcon;
+      };
+      
+      if (window.matchMedia) {
+        const matcher = window.matchMedia('(prefers-color-scheme: dark)');
+        matcher.addEventListener('change', updateFavicon);
+        // Set initial state
+        updateFavicon(matcher);
+      }
+    </script>
   </head>
   <body class="bg-black text-white overflow-x-hidden selection:bg-lumo-brand/30 selection:text-black">
     <main class="w-full relative z-10">
