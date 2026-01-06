@@ -69,6 +69,26 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .contact-success-button {
+    background-color: transparent !important;
+    color: #FFC82C !important;
+    border: 1px solid #FFC82C !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .contact-success-button:hover {
+    background-color: transparent !important;
+    color: #FFC82C !important;
+    border-color: #FFC82C !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .contact-success-button:active {
+    transform: none !important;
+  }
   
   /* Glow effects for text */
   .text-glow {

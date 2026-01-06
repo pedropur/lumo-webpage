@@ -31,17 +31,19 @@ import { FadeIn } from '../ui/FadeIn';
       </FadeIn>
       
       <FadeIn client:load delay={0.3}>
-        <form class="flex flex-col sm:flex-row gap-4 max-w-md" onsubmit="event.preventDefault();">
+        <form class="contact-form flex flex-col sm:flex-row gap-4 max-w-md" onsubmit="event.preventDefault();">
           <input 
             type="email" 
+            name="email"
+            required
             placeholder="Seu e-mail corporativo" 
             class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder:text-gray-500 focus:outline-none focus:border-lumo-brand/50 focus:ring-1 focus:ring-lumo-brand/50 transition-all backdrop-blur-sm"
           />
-          <Button variant="primary" class="!px-6 !py-3.5 whitespace-nowrap">
+          <Button variant="primary" type="submit" class="!px-6 !py-3.5 whitespace-nowrap">
             Saiba mais
           </Button>
         </form>
-        <p class="text-xs text-lumo-text-muted mt-4 ml-1">
+        <p class="text-xs text-lumo-text-muted mt-4 ml-1" data-form-message>
           Junte-se a líderes financeiros de empresas high-growth.
         </p>
       </FadeIn>

@@ -58,6 +58,7 @@ const structuredData = {
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="application/ld+json">
       {JSON.stringify(structuredData)}
     </script>
@@ -101,8 +102,83 @@ const structuredData = {
       }, observerOptions);
       
       document.addEventListener('DOMContentLoaded', () => {
+        if (window.emailjs) {
+          window.emailjs.init('O44KDP55MF8sy-1eS');
+        }
+
         document.querySelectorAll('.reveal-on-scroll').forEach(el => {
           observer.observe(el);
+        });
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        document.querySelectorAll('form.contact-form').forEach((form) => {
+          const messageEl = form.querySelector('[data-form-message]') ?? form.parentElement?.querySelector('[data-form-message]');
+          const allowMessageUpdate = messageEl ? !form.contains(messageEl) : false;
+          const defaultMessage = messageEl?.textContent ?? '';
+          const submitButton = form.querySelector('button[type="submit"]');
+          const defaultButtonText = submitButton?.textContent ?? '';
+          const emailInput = form.querySelector('input[type="email"]');
+
+          const resetMessage = () => {
+            if (allowMessageUpdate && messageEl && defaultMessage) {
+              messageEl.textContent = defaultMessage;
+            }
+          };
+
+          form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const email = emailInput?.value?.trim() ?? '';
+            submitButton?.classList.remove('contact-success-button');
+            if (!emailRegex.test(email)) {
+              if (allowMessageUpdate && messageEl) {
+                messageEl.textContent = '✗ Erro';
+              }
+              setTimeout(resetMessage, 4000);
+              return;
+            }
+
+            submitButton?.setAttribute('disabled', 'true');
+            if (submitButton) {
+              submitButton.textContent = 'Enviando...';
+            }
+
+            try {
+              if (!window.emailjs) {
+                throw new Error('EmailJS unavailable');
+              }
+
+              await window.emailjs.send('service_9qfmy3p', 'template_nlq9zse', {
+                from_email: email,
+                reply_to: email,
+              });
+
+              if (allowMessageUpdate && messageEl) {
+                messageEl.textContent = 'ENTRAREMOS EM CONTATO';
+              }
+              if (submitButton) {
+                submitButton.textContent = 'ENTRAREMOS EM CONTATO';
+                submitButton.classList.add('contact-success-button');
+              }
+              emailInput?.setAttribute('disabled', 'true');
+            } catch (error) {
+              if (allowMessageUpdate && messageEl) {
+                messageEl.textContent = '✗ Erro';
+              }
+              if (submitButton) {
+                submitButton.textContent = '✗ Erro';
+                submitButton.classList.remove('contact-success-button');
+              }
+              submitButton?.removeAttribute('disabled');
+              if (submitButton && defaultButtonText) {
+                setTimeout(() => {
+                  submitButton.textContent = defaultButtonText;
+                }, 4000);
+              }
+              setTimeout(resetMessage, 4000);
+            }
+          });
         });
       });
     </script>
