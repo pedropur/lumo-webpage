@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/ui/Section.astro';
+import Footer from '../components/sections/Footer.astro';
+---
+
+<Layout title="Lumo | Terms of Service" description="Terms of Service for Lumo.">
+  <div class="relative">
+    <Section class="pt-32 pb-16 md:pt-36 md:pb-20">
+      <div class="max-w-3xl">
+        <p class="text-sm uppercase tracking-[0.2em] text-lumo-text-muted">Legal</p>
+        <h1 class="heading-md mt-4 text-white">Terms of Service</h1>
+        <div class="mt-8 space-y-6 text-base md:text-lg text-lumo-text-secondary leading-relaxed">
+          <p>Lumo provides automation tools for finance operations.</p>
+          <p>
+            By using Lumo, you authorize us to access connected services (such as Gmail) strictly to perform
+            requested actions.
+          </p>
+          <p>The service is provided "as is", without warranties. You are responsible for ensuring you have the right to grant access to connected accounts.</p>
+          <p>We may suspend or terminate access in case of misuse.</p>
+          <p>Governing law: Brazil.</p>
+        </div>
+      </div>
+    </Section>
+    <Footer />
+  </div>
+</Layout>
