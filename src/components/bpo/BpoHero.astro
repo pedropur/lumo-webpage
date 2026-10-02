@@ -1,0 +1,37 @@
+---
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import { LAUNCH_PRICE } from '../../config/bpo';
+---
+
+<Section class="pt-28 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
+  <div class="absolute inset-0 animated-gradient opacity-40" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-3xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8">
+      <span class="w-2 h-2 rounded-full bg-lumo-brand animate-pulse" aria-hidden="true"></span>
+      <span class="text-xs font-medium text-lumo-brand tracking-wide uppercase">Lumo BPO · Lançamento em breve</span>
+    </div>
+
+    <h1 class="heading-xl text-white mb-6 text-balance leading-[1.1] text-glow-subtle">
+      Seu Omie sempre em dia.<br />
+      <span class="text-lumo-brand text-glow-brand">Sem você digitar nada.</span>
+    </h1>
+
+    <p class="body-lg text-lumo-text-secondary mb-4 max-w-2xl leading-relaxed">
+      Mande boletos, notas e extratos pelo WhatsApp. O Lumo lança as contas a pagar e a receber no seu Omie,
+      concilia o banco e envia o relatório do mês. A partir de R$ 197/mês.
+    </p>
+    <p class="body-base text-white mb-10 max-w-2xl">
+      Lançamento em breve: entre na lista de espera e tenha acesso antecipado.
+      Quem entra na lista paga {LAUNCH_PRICE.price}/mês nos {LAUNCH_PRICE.months} primeiros meses do plano {LAUNCH_PRICE.plan}.
+    </p>
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <Button href="#lista" variant="primary" class="!px-8 !py-4 text-base">
+        Entrar na lista de espera
+      </Button>
+      <p class="text-sm text-lumo-text-muted">Sem fidelidade. Cancele quando quiser.</p>
+    </div>
+  </div>
+</Section>

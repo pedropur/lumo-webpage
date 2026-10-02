@@ -1,0 +1,58 @@
+---
+import Section from '../ui/Section.astro';
+import { LAUNCH_PRICE } from '../../config/bpo';
+
+const faqs = [
+  {
+    q: 'Como funciona a lista de espera?',
+    a: `O Lumo BPO ainda não está no ar. Você preenche o formulário e avisamos pelo e-mail ou WhatsApp que informar quando abrirmos. Entrar na lista não custa nada. Quem entra na lista paga ${LAUNCH_PRICE.price}/mês nos ${LAUNCH_PRICE.months} primeiros meses do plano ${LAUNCH_PRICE.plan}.`,
+  },
+  {
+    q: 'Preciso ter Omie?',
+    a: 'Sim. O Lumo trabalha dentro do seu Omie. Se você ainda não usa, contrate o Omie primeiro.',
+  },
+  {
+    q: 'É seguro dar acesso ao meu Omie?',
+    a: 'Você escolhe como liberar o acesso: compartilhar uma chave de API do Omie ou criar um usuário dedicado ao Lumo no seu Omie, do mesmo jeito que faria com um BPO financeiro humano. Nos dois casos, você pode revogar o acesso a qualquer momento. Não pedimos senha de banco e não fazemos pagamentos nem movimentamos dinheiro.',
+  },
+  {
+    q: 'Quem responde o suporte pelo WhatsApp?',
+    a: 'O próprio Lumo. O suporte por WhatsApp, em dias úteis, é respondido pelo Lumo, o mesmo sistema que cuida dos seus lançamentos.',
+  },
+  {
+    q: 'E se a foto do documento estiver ruim?',
+    a: 'Não lançamos no chute. Avisamos pelo WhatsApp em até 1 dia útil, dizendo o que falta.',
+  },
+  {
+    q: 'O Lumo substitui o meu contador?',
+    a: 'Não. O contador cuida de impostos e contabilidade. O Lumo cuida do dia a dia financeiro dentro do Omie, e o seu contador recebe tudo mais organizado.',
+  },
+  {
+    q: 'O Lumo paga minhas contas?',
+    a: 'Não. Lançamos as contas com vencimento no Omie. O pagamento é sempre seu.',
+  },
+  {
+    q: 'Quanto tempo leva para começar?',
+    a: 'Cerca de 15 minutos: você libera o acesso ao Omie (chave de API ou usuário dedicado), informa quem vai enviar documentos e conecta o extrato. Mandamos o passo a passo pelo WhatsApp.',
+  },
+  {
+    q: 'Tem fidelidade?',
+    a: 'Não. O plano é mensal. Cancele pelo WhatsApp quando quiser.',
+  },
+];
+---
+
+<Section id="faq" class="py-16 md:py-24">
+  <h2 class="heading-md text-white mb-10 md:mb-14">Perguntas frequentes</h2>
+  <div class="max-w-3xl divide-y divide-white/10 border-y border-white/10">
+    {faqs.map((item) => (
+      <details class="group py-5">
+        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none text-lg font-medium text-white [&::-webkit-details-marker]:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-lumo-brand/50 rounded">
+          <span>{item.q}</span>
+          <svg class="w-5 h-5 shrink-0 text-lumo-text-muted transition-transform group-open:rotate-45" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" /></svg>
+        </summary>
+        <p class="mt-3 text-lumo-text-secondary leading-relaxed">{item.a}</p>
+      </details>
+    ))}
+  </div>
+</Section>

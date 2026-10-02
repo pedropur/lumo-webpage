@@ -1,0 +1,223 @@
+---
+import Section from '../ui/Section.astro';
+import {
+  BPO_CONTACT,
+  BPO_PLACEHOLDERS,
+  LAUNCH_PRICE,
+  VOLUME_OPTIONS,
+  WAITLIST_ENDPOINT,
+} from '../../config/bpo';
+
+const inputClass =
+  'w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:border-lumo-brand/50 focus:ring-1 focus:ring-lumo-brand/50 transition-all';
+const labelClass = 'block text-sm font-medium text-white mb-2';
+---
+
+<Section id="lista" class="py-16 md:py-24 scroll-mt-20">
+  <div class="max-w-2xl mx-auto">
+    <div class="text-center mb-10">
+      <h2 class="heading-md text-white mb-4">Pare de digitar no Omie.</h2>
+      <p class="body-base text-lumo-text-secondary">
+        Entre na lista de espera e seja avisado quando o Lumo BPO abrir. Quem entra na lista paga
+        {LAUNCH_PRICE.price}/mês nos {LAUNCH_PRICE.months} primeiros meses do plano {LAUNCH_PRICE.plan}.
+      </p>
+    </div>
+
+    <div class="bg-white/[0.02] border border-white/10 rounded-2xl p-6 md:p-10">
+      <form
+        id="waitlist-form"
+        novalidate
+        data-endpoint={WAITLIST_ENDPOINT.url}
+        data-service-id={WAITLIST_ENDPOINT.serviceId}
+        data-template-id={WAITLIST_ENDPOINT.templateId}
+        data-public-key={WAITLIST_ENDPOINT.publicKey}
+        data-support-email={BPO_CONTACT.supportEmail}
+        class="flex flex-col gap-5"
+      >
+        <div>
+          <label for="wl-nome" class={labelClass}>Nome</label>
+          <input id="wl-nome" name="nome" type="text" required autocomplete="name" maxlength="120" class={inputClass} />
+        </div>
+        <div>
+          <label for="wl-email" class={labelClass}>E-mail</label>
+          <input id="wl-email" name="email" type="email" required autocomplete="email" inputmode="email" maxlength="160" placeholder="voce@empresa.com.br" class={inputClass} />
+        </div>
+        <div>
+          <label for="wl-whatsapp" class={labelClass}>WhatsApp</label>
+          <input id="wl-whatsapp" name="whatsapp" type="tel" required autocomplete="tel" inputmode="tel" maxlength="24" placeholder="(11) 91234-5678" class={inputClass} />
+        </div>
+        <div>
+          <label for="wl-empresa" class={labelClass}>Empresa</label>
+          <input id="wl-empresa" name="empresa" type="text" required autocomplete="organization" maxlength="160" class={inputClass} />
+        </div>
+
+        <fieldset>
+          <legend class={labelClass}>Quantos lançamentos por mês?</legend>
+          <div class="grid grid-cols-2 gap-3">
+            {VOLUME_OPTIONS.map((opt) => (
+              <label class="cursor-pointer">
+                <input type="radio" name="volume" value={opt.value} required class="peer sr-only" />
+                <span class="flex items-center justify-center text-center px-3 py-3 rounded-lg border border-white/10 bg-white/5 text-sm text-lumo-text-secondary transition-all peer-checked:bg-lumo-brand peer-checked:border-lumo-brand peer-checked:text-black peer-checked:font-medium peer-focus-visible:ring-2 peer-focus-visible:ring-lumo-brand/60 hover:border-white/30">
+                  {opt.label}
+                </span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+          <label for="wl-website">Não preencha este campo</label>
+          <input id="wl-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <p id="waitlist-error" role="alert" class="hidden text-sm text-red-400"></p>
+
+        <button
+          id="waitlist-submit"
+          type="submit"
+          class="inline-flex items-center justify-center px-6 py-4 text-base font-medium rounded-lg transition-all duration-300 bg-lumo-brand text-black hover:bg-lumo-brand/90 shadow-glow hover:shadow-glow-lg active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-lumo-brand/50 disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          Entrar na lista de espera
+        </button>
+
+        <p class="text-xs text-lumo-text-muted text-center leading-relaxed">
+          Sem fidelidade. Entrar na lista não custa nada. Ao enviar, você concorda com a
+          <a href={BPO_PLACEHOLDERS.privacyUrl} class="underline hover:text-white transition-colors">Política de Privacidade</a>.
+        </p>
+      </form>
+
+      <div id="waitlist-success" tabindex="-1" role="status" class="hidden text-center py-6 focus:outline-none">
+        <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-lumo-brand text-black" aria-hidden="true">
+          <svg class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 111.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd" /></svg>
+        </div>
+        <h3 class="text-2xl font-medium text-white mb-3">Você está na lista de espera!</h3>
+        <p class="text-lumo-text-secondary leading-relaxed">
+          Obrigado, <span id="waitlist-success-name" class="text-white"></span>. Recebemos seus dados e vamos avisar
+          por e-mail ou WhatsApp quando o Lumo BPO abrir. Seu preço de lista de espera:
+          {LAUNCH_PRICE.price}/mês nos {LAUNCH_PRICE.months} primeiros meses do plano {LAUNCH_PRICE.plan}.
+        </p>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<script>
+  const form = document.getElementById('waitlist-form') as HTMLFormElement | null;
+  const submitButton = document.getElementById('waitlist-submit') as HTMLButtonElement | null;
+  const errorEl = document.getElementById('waitlist-error');
+  const successEl = document.getElementById('waitlist-success');
+  const successName = document.getElementById('waitlist-success-name');
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const defaultButtonText = submitButton?.textContent ?? '';
+
+  // Returns +55XXXXXXXXXXX (10 or 11 national digits) or null when invalid.
+  function normalizeWhatsapp(raw: string): string | null {
+    let digits = raw.replace(/\D/g, '');
+    if (digits.length >= 12 && digits.startsWith('55')) digits = digits.slice(2);
+    if (digits.length !== 10 && digits.length !== 11) return null;
+    return `+55${digits}`;
+  }
+
+  function showError(message: string, field?: HTMLElement | null) {
+    if (!errorEl) return;
+    errorEl.textContent = message;
+    errorEl.classList.remove('hidden');
+    field?.focus();
+  }
+
+  function clearError() {
+    if (!errorEl) return;
+    errorEl.textContent = '';
+    errorEl.classList.add('hidden');
+  }
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form || !submitButton) return;
+    clearError();
+
+    const data = new FormData(form);
+    const value = (name: string) => String(data.get(name) ?? '').trim();
+
+    if (value('website')) {
+      // Honeypot filled: pretend success without sending anything.
+      form.classList.add('hidden');
+      successEl?.classList.remove('hidden');
+      return;
+    }
+
+    const nome = value('nome');
+    const email = value('email');
+    const empresa = value('empresa');
+    const volume = value('volume');
+    const whatsapp = normalizeWhatsapp(value('whatsapp'));
+
+    if (!nome) return showError('Informe seu nome.', form.elements.namedItem('nome') as HTMLElement);
+    if (!emailRegex.test(email)) return showError('Informe um e-mail válido.', form.elements.namedItem('email') as HTMLElement);
+    if (!whatsapp) return showError('Informe um WhatsApp válido com DDD, por exemplo (11) 91234-5678.', form.elements.namedItem('whatsapp') as HTMLElement);
+    if (!empresa) return showError('Informe o nome da empresa.', form.elements.namedItem('empresa') as HTMLElement);
+    if (!volume) return showError('Escolha quantos lançamentos por mês você tem.');
+
+    const volumeLabel =
+      (form.querySelector(`input[name="volume"][value="${volume}"]`)?.nextElementSibling?.textContent ?? volume).trim();
+
+    const message = [
+      'Nova inscrição na lista de espera do Lumo BPO',
+      `Nome: ${nome}`,
+      `E-mail: ${email}`,
+      `WhatsApp: ${whatsapp}`,
+      `Empresa: ${empresa}`,
+      `Lançamentos por mês: ${volumeLabel}`,
+    ].join('\n');
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Enviando...';
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+
+    try {
+      const response = await fetch(form.dataset.endpoint ?? '', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          service_id: form.dataset.serviceId,
+          template_id: form.dataset.templateId,
+          user_id: form.dataset.publicKey,
+          template_params: {
+            source: 'lumo-bpo-waitlist',
+            from_name: nome,
+            from_email: email,
+            reply_to: email,
+            name: nome,
+            email,
+            whatsapp,
+            company: empresa,
+            volume: volumeLabel,
+            volume_range: volume,
+            message,
+            page: window.location.href,
+            submitted_at: new Date().toISOString(),
+          },
+        }),
+      });
+      if (!response.ok) throw new Error(`Waitlist request failed: ${response.status}`);
+
+      if (successName) successName.textContent = nome.split(/\s+/)[0];
+      form.classList.add('hidden');
+      successEl?.classList.remove('hidden');
+      successEl?.focus();
+    } catch (error) {
+      console.error(error);
+      showError(
+        `Não foi possível enviar agora. Tente novamente em instantes ou escreva para ${form.dataset.supportEmail}.`,
+      );
+      submitButton.disabled = false;
+      submitButton.textContent = defaultButtonText;
+    } finally {
+      clearTimeout(timeout);
+    }
+  });
+</script>
