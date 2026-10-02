@@ -22,21 +22,15 @@ export const BPO_CONTACT = {
 } as const;
 
 /**
- * Waitlist storage (see WaitlistCta.astro and docs/bpo-waitlist-sheet.md):
- *
- * 1. Primary: when PUBLIC_BPO_WAITLIST_ENDPOINT is set at build time, each signup
- *    is POSTed to that Google Apps Script web app, which appends a row to a sheet.
- * 2. Fallback: when it is not set (or the request fails), the signup is sent by
- *    email through EmailJS, so no signup is lost. The EmailJS public key and
- *    service id are the ones already shipped in Layout.astro (public by design).
- *    PUBLIC_EMAILJS_WAITLIST_TEMPLATE_ID optionally selects a dedicated template.
+ * Waitlist delivery (see WaitlistCta.astro): each signup is sent by email through
+ * the same EmailJS service and template the main site contact forms use
+ * (Layout.astro). The public key and ids are public by design.
  */
 export const WAITLIST_ENDPOINT = {
-  sheetUrl: (import.meta.env.PUBLIC_BPO_WAITLIST_ENDPOINT || '').trim(),
   url: 'https://api.emailjs.com/api/v1.0/email/send',
   serviceId: 'service_9qfmy3p',
   publicKey: 'O44KDP55MF8sy-1eS',
-  templateId: import.meta.env.PUBLIC_EMAILJS_WAITLIST_TEMPLATE_ID || 'template_nlq9zse',
+  templateId: 'template_nlq9zse',
 } as const;
 
 export const VOLUME_OPTIONS = [
