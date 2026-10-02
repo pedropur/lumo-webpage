@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 
-const staticPaths = ['/' ];
+const staticPaths = ['/', '/bpo'];
 
 export const GET: APIRoute = ({ site }) => {
   const origin = site ? site.origin : '';

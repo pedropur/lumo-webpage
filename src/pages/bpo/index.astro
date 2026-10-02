@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BpoHeader from '../../components/bpo/BpoHeader.astro';
+import BpoHero from '../../components/bpo/BpoHero.astro';
+import HowItWorks from '../../components/bpo/HowItWorks.astro';
+import Benefits from '../../components/bpo/Benefits.astro';
+import Pricing from '../../components/bpo/Pricing.astro';
+import Included from '../../components/bpo/Included.astro';
+import Faq from '../../components/bpo/Faq.astro';
+import WaitlistCta from '../../components/bpo/WaitlistCta.astro';
+import BpoFooter from '../../components/bpo/BpoFooter.astro';
+---
+
+<Layout
+  title="Lumo BPO | BPO financeiro automatizado para quem usa Omie"
+  description="Lista de espera do Lumo BPO: mande boletos, notas e extratos pelo WhatsApp e o Lumo lança e concilia tudo no seu Omie. A partir de R$ 197/mês. Lançamento em breve."
+  loadEmailJs={false}
+>
+  <BpoHeader />
+  <div class="relative">
+    <BpoHero />
+    <HowItWorks />
+    <Benefits />
+    <Pricing />
+    <Included />
+    <Faq />
+    <WaitlistCta />
+    <BpoFooter />
+  </div>
+</Layout>

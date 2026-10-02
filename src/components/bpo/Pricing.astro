@@ -1,0 +1,85 @@
+---
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import { PLANS, LAUNCH_PRICE } from '../../config/bpo';
+
+const sharedFeatures = [
+  'Envio por WhatsApp e e-mail',
+  'Lançamento e categorização no Omie',
+  'Relatório financeiro mensal',
+];
+---
+
+<Section id="planos" class="py-16 md:py-24">
+  <h2 class="heading-md text-white mb-4">Planos</h2>
+  <p class="text-lumo-text-secondary mb-8 md:mb-10">Preços previstos para o lançamento, por mês e sem fidelidade.</p>
+
+  <div class="mb-8 md:mb-10 rounded-2xl border border-lumo-brand/40 bg-lumo-brand/[0.06] p-5 md:p-6">
+    <p class="text-white font-medium">
+      Lista de espera: {LAUNCH_PRICE.price}/mês nos {LAUNCH_PRICE.months} primeiros meses do plano {LAUNCH_PRICE.plan}.
+    </p>
+    <p class="text-sm text-lumo-text-secondary mt-1">
+      Preço de lançamento para quem entrar na lista de espera. Depois, o plano segue o valor da tabela.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+    {PLANS.map((plan) => (
+      <article class="flex flex-col bg-white/[0.02] border border-white/10 rounded-2xl p-6 md:p-8">
+        <h3 class="text-xl font-medium text-white">{plan.name}</h3>
+        <p class="mt-3 mb-6">
+          <span class="text-4xl font-semibold text-white tracking-tight">{plan.price}</span>
+          <span class="text-lumo-text-secondary">/mês</span>
+        </p>
+
+        <dl class="text-sm divide-y divide-white/10 border-t border-white/10 mb-6">
+          <div class="flex justify-between gap-4 py-3">
+            <dt class="text-lumo-text-secondary">Lançamentos por mês</dt>
+            <dd class="text-white text-right">{plan.volume}</dd>
+          </div>
+          <div class="flex justify-between gap-4 py-3">
+            <dt class="text-lumo-text-secondary">Contas bancárias</dt>
+            <dd class="text-white text-right">{plan.accounts}</dd>
+          </div>
+          <div class="flex justify-between gap-4 py-3">
+            <dt class="text-lumo-text-secondary">Conciliação bancária</dt>
+            <dd class="text-white text-right">{plan.reconciliation}</dd>
+          </div>
+          <div class="flex justify-between gap-4 py-3">
+            <dt class="text-lumo-text-secondary">Lançamento excedente</dt>
+            <dd class="text-white text-right">{plan.overage}</dd>
+          </div>
+        </dl>
+
+        <ul class="space-y-2 text-sm mb-8">
+          {sharedFeatures.map((f) => (
+            <li class="flex gap-2 text-lumo-text-secondary">
+              <svg class="w-4 h-4 mt-0.5 shrink-0 text-lumo-brand" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 111.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd" /></svg>
+              <span>{f}</span>
+            </li>
+          ))}
+          <li class={`flex gap-2 ${plan.weeklySummary ? 'text-lumo-text-secondary' : 'text-lumo-text-muted'}`}>
+            {plan.weeklySummary ? (
+              <svg class="w-4 h-4 mt-0.5 shrink-0 text-lumo-brand" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 111.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd" /></svg>
+            ) : (
+              <span class="w-4 shrink-0 text-center" aria-hidden="true">–</span>
+            )}
+            <span>
+              Resumo semanal de contas dos próximos 7 dias
+              {!plan.weeklySummary && <span class="sr-only"> (não incluído neste plano)</span>}
+            </span>
+          </li>
+        </ul>
+
+        <Button href="#lista" variant="secondary" class="mt-auto w-full">
+          Entrar na lista de espera
+        </Button>
+      </article>
+    ))}
+  </div>
+
+  <p class="text-sm text-lumo-text-muted mt-6 max-w-3xl leading-relaxed">
+    1 lançamento = 1 conta a pagar ou a receber registrada no Omie. Conciliar um lançamento que já existe não conta de novo.
+    Avisamos quando você chegar a 80% da franquia. Mais de 600 lançamentos? Fale com a gente.
+  </p>
+</Section>

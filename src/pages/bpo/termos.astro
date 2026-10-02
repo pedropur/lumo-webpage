@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/ui/Section.astro';
+import BpoHeader from '../../components/bpo/BpoHeader.astro';
+import BpoFooter from '../../components/bpo/BpoFooter.astro';
+import { BPO_CONTACT } from '../../config/bpo';
+---
+
+<Layout
+  title="Termos de Uso | Lumo BPO"
+  description="Termos de Uso do Lumo BPO (texto provisório)."
+  loadEmailJs={false}
+  noindex
+>
+  <BpoHeader />
+  <div class="relative">
+    <Section class="pt-28 pb-16 md:pt-36 md:pb-20">
+      <div class="max-w-3xl">
+        <p class="inline-block rounded border border-lumo-brand/50 bg-lumo-brand/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-lumo-brand">
+          Texto provisório. Substituir antes do lançamento.
+        </p>
+        <h1 class="heading-md mt-6 text-white">Termos de Uso (provisórios)</h1>
+        <div class="mt-8 space-y-6 text-base md:text-lg text-lumo-text-secondary leading-relaxed">
+          <p>
+            [PLACEHOLDER] Esta é uma página provisória do Lumo BPO. Os Termos de Uso definitivos ainda serão publicados aqui.
+          </p>
+          <p>
+            O Lumo BPO ainda não está disponível para contratação. Entrar na lista de espera não gera cobrança nem obrigação.
+          </p>
+          <p>
+            Dúvidas:
+            <a class="text-white hover:text-lumo-brand transition-colors" href={`mailto:${BPO_CONTACT.supportEmail}`}>{BPO_CONTACT.supportEmail}</a>
+          </p>
+          <p><a class="text-white hover:text-lumo-brand transition-colors" href="/bpo">Voltar para o Lumo BPO</a></p>
+        </div>
+      </div>
+    </Section>
+    <BpoFooter />
+  </div>
+</Layout>

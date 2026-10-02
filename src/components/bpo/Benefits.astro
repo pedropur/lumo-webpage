@@ -1,0 +1,42 @@
+---
+import Section from '../ui/Section.astro';
+
+const benefits = [
+  {
+    title: 'O Omie que você já paga, finalmente atualizado.',
+    text: 'Contas a pagar, contas a receber e saldo batendo com o banco.',
+  },
+  {
+    title: 'Sem digitação e sem planilha paralela.',
+    text: 'Uma foto no WhatsApp basta.',
+  },
+  {
+    title: 'Fechamento sem mutirão.',
+    text: 'O extrato é conciliado ao longo do mês, não só no dia 30.',
+  },
+  {
+    title: 'Seu contador recebe tudo organizado.',
+    text: 'Menos idas e vindas pedindo documento.',
+  },
+  {
+    title: 'Preço de software, não de equipe.',
+    text: 'Por ser automatizado, custa bem menos que um BPO financeiro tradicional.',
+  },
+  {
+    title: 'Você continua no controle.',
+    text: 'Não pagamos contas e não movimentamos dinheiro. Só organizamos o seu Omie.',
+  },
+];
+---
+
+<Section id="beneficios" class="py-16 md:py-24">
+  <h2 class="heading-md text-white mb-10 md:mb-14">Por que usar o Lumo</h2>
+  <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+    {benefits.map((b) => (
+      <li class="bg-white/[0.02] border border-white/10 rounded-2xl p-6 md:p-8 hover:border-white/20 transition-colors">
+        <h3 class="text-lg font-medium text-white mb-2">{b.title}</h3>
+        <p class="text-lumo-text-secondary leading-relaxed">{b.text}</p>
+      </li>
+    ))}
+  </ul>
+</Section>

@@ -1,0 +1,31 @@
+---
+import Section from '../ui/Section.astro';
+
+const steps = [
+  {
+    title: 'Você manda.',
+    text: 'Encaminhe boletos, notas fiscais, recibos, comprovantes e extratos pelo WhatsApp ou por e-mail, do jeito que chegam.',
+  },
+  {
+    title: 'O Lumo lança.',
+    text: 'Lemos cada documento e registramos a conta a pagar ou a receber no seu Omie, já com a categoria certa, em até 1 dia útil.',
+  },
+  {
+    title: 'O banco bate.',
+    text: 'Conciliamos o extrato com os lançamentos e, no começo de cada mês, você recebe o relatório financeiro.',
+  },
+];
+---
+
+<Section id="como-funciona" class="py-16 md:py-24">
+  <h2 class="heading-md text-white mb-10 md:mb-14">Como funciona</h2>
+  <ol class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+    {steps.map((step, i) => (
+      <li class="bg-white/[0.02] border border-white/10 rounded-2xl p-6 md:p-8">
+        <span class="flex items-center justify-center w-9 h-9 rounded-full bg-lumo-brand text-black text-sm font-semibold mb-5" aria-hidden="true">{i + 1}</span>
+        <h3 class="text-xl font-medium text-white mb-2">{step.title}</h3>
+        <p class="text-lumo-text-secondary leading-relaxed">{step.text}</p>
+      </li>
+    ))}
+  </ol>
+</Section>

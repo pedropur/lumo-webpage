@@ -1,0 +1,31 @@
+---
+import Section from '../ui/Section.astro';
+import { BPO_CONTACT, BPO_PLACEHOLDERS } from '../../config/bpo';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-black border-t border-white/10">
+  <Section class="py-12 md:py-16">
+    <img src="/assets/logo.png" alt="Lumo" class="h-7 w-auto mb-6 opacity-80" width="96" height="28" loading="lazy" />
+
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-lumo-text-muted">
+      <p>
+        &copy; {currentYear} {BPO_CONTACT.companyName} · CNPJ <span data-placeholder="cnpj">{BPO_PLACEHOLDERS.cnpj}</span>
+      </p>
+      <p>
+        WhatsApp: <span data-placeholder="whatsapp">{BPO_PLACEHOLDERS.whatsappDisplay}</span> ·
+        <a href={`mailto:${BPO_CONTACT.supportEmail}`} class="hover:text-white transition-colors">{BPO_CONTACT.supportEmail}</a>
+      </p>
+      <p class="flex items-center gap-4">
+        <a href={BPO_PLACEHOLDERS.privacyUrl} class="hover:text-white transition-colors">Política de Privacidade</a>
+        <a href={BPO_PLACEHOLDERS.termsUrl} class="hover:text-white transition-colors">Termos de Uso</a>
+      </p>
+    </div>
+
+    <p class="mt-8 text-xs text-lumo-text-muted leading-relaxed max-w-3xl">
+      O Lumo não é escritório de contabilidade nem instituição financeira e não realiza pagamentos. Omie é marca
+      registrada de seus respectivos titulares. O Lumo não é afiliado ao Omie.
+    </p>
+  </Section>
+</footer>

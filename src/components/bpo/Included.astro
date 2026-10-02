@@ -1,0 +1,47 @@
+---
+import Section from '../ui/Section.astro';
+
+const included = [
+  'Recebimento de documentos por WhatsApp e e-mail',
+  'Lançamento e categorização de contas a pagar e a receber no Omie',
+  'Conciliação bancária (via extrato OFX ou banco integrado ao Omie)',
+  'Aviso quando um documento estiver ilegível ou incompleto',
+  'Relatório financeiro mensal',
+  'Suporte por WhatsApp em dias úteis, respondido pelo próprio Lumo',
+];
+
+const notIncluded = [
+  'Pagamentos ou qualquer movimentação de dinheiro',
+  'Emissão de notas fiscais ou boletos e cobrança de clientes',
+  'Contabilidade, impostos e folha (isso continua com o seu contador)',
+  'Implantação do Omie e lançamentos de meses anteriores',
+];
+---
+
+<Section id="incluido" class="py-16 md:py-24">
+  <h2 class="heading-md text-white mb-10 md:mb-14">O que está incluído e o que não está</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+    <div class="bg-white/[0.02] border border-white/10 rounded-2xl p-6 md:p-8">
+      <h3 class="text-lg font-medium text-white mb-5">Incluído</h3>
+      <ul class="space-y-3">
+        {included.map((item) => (
+          <li class="flex gap-3 text-lumo-text-secondary">
+            <svg class="w-5 h-5 mt-0.5 shrink-0 text-lumo-brand" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 111.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd" /></svg>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="bg-white/[0.02] border border-white/10 rounded-2xl p-6 md:p-8">
+      <h3 class="text-lg font-medium text-white mb-5">Não incluído</h3>
+      <ul class="space-y-3">
+        {notIncluded.map((item) => (
+          <li class="flex gap-3 text-lumo-text-secondary">
+            <svg class="w-5 h-5 mt-0.5 shrink-0 text-lumo-text-muted" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.3 4.3a1 1 0 011.4 0L10 8.6l4.3-4.3a1 1 0 111.4 1.4L11.4 10l4.3 4.3a1 1 0 01-1.4 1.4L10 11.4l-4.3 4.3a1 1 0 01-1.4-1.4L8.6 10 4.3 5.7a1 1 0 010-1.4z" clip-rule="evenodd" /></svg>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</Section>
