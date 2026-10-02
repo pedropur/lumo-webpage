@@ -27,6 +27,7 @@ const labelClass = 'block text-sm font-medium text-white mb-2';
       <form
         id="waitlist-form"
         novalidate
+        data-sheet-endpoint={WAITLIST_ENDPOINT.sheetUrl}
         data-endpoint={WAITLIST_ENDPOINT.url}
         data-service-id={WAITLIST_ENDPOINT.serviceId}
         data-template-id={WAITLIST_ENDPOINT.templateId}
@@ -119,6 +120,46 @@ const labelClass = 'block text-sm font-medium text-white mb-2';
     return `+55${digits}`;
   }
 
+  async function postWithTimeout(url: string, init: RequestInit, timeoutMs: number): Promise<Response> {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      return await fetch(url, { ...init, method: 'POST', signal: controller.signal });
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  // Google Apps Script web app. text/plain keeps this a "simple" CORS request
+  // (no preflight, which Apps Script does not answer); the script replies with JSON.
+  async function sendToSheet(url: string, params: Record<string, string>) {
+    const response = await postWithTimeout(
+      url,
+      { headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(params) },
+      12000,
+    );
+    if (!response.ok) throw new Error(`Sheet request failed: ${response.status}`);
+    const result = await response.json();
+    if (!result?.ok) throw new Error(`Sheet rejected the signup: ${result?.error ?? 'unknown error'}`);
+  }
+
+  async function sendToEmailJs(form: HTMLFormElement, params: Record<string, string>) {
+    const response = await postWithTimeout(
+      form.dataset.endpoint ?? '',
+      {
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          service_id: form.dataset.serviceId,
+          template_id: form.dataset.templateId,
+          user_id: form.dataset.publicKey,
+          template_params: params,
+        }),
+      },
+      15000,
+    );
+    if (!response.ok) throw new Error(`EmailJS request failed: ${response.status}`);
+  }
+
   function showError(message: string, field?: HTMLElement | null) {
     if (!errorEl) return;
     errorEl.textContent = message;
@@ -174,36 +215,34 @@ const labelClass = 'block text-sm font-medium text-white mb-2';
     submitButton.disabled = true;
     submitButton.textContent = 'Enviando...';
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
+    const params = {
+      source: 'lumo-bpo-waitlist',
+      from_name: nome,
+      from_email: email,
+      reply_to: email,
+      name: nome,
+      email,
+      whatsapp,
+      company: empresa,
+      volume: volumeLabel,
+      volume_range: volume,
+      message,
+      page: window.location.href,
+      submitted_at: new Date().toISOString(),
+    };
 
     try {
-      const response = await fetch(form.dataset.endpoint ?? '', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        signal: controller.signal,
-        body: JSON.stringify({
-          service_id: form.dataset.serviceId,
-          template_id: form.dataset.templateId,
-          user_id: form.dataset.publicKey,
-          template_params: {
-            source: 'lumo-bpo-waitlist',
-            from_name: nome,
-            from_email: email,
-            reply_to: email,
-            name: nome,
-            email,
-            whatsapp,
-            company: empresa,
-            volume: volumeLabel,
-            volume_range: volume,
-            message,
-            page: window.location.href,
-            submitted_at: new Date().toISOString(),
-          },
-        }),
-      });
-      if (!response.ok) throw new Error(`Waitlist request failed: ${response.status}`);
+      let stored = false;
+      const sheetEndpoint = form.dataset.sheetEndpoint;
+      if (sheetEndpoint) {
+        try {
+          await sendToSheet(sheetEndpoint, params);
+          stored = true;
+        } catch (sheetError) {
+          console.error(sheetError);
+        }
+      }
+      if (!stored) await sendToEmailJs(form, params);
 
       if (successName) successName.textContent = nome.split(/\s+/)[0];
       form.classList.add('hidden');
@@ -216,8 +255,6 @@ const labelClass = 'block text-sm font-medium text-white mb-2';
       );
       submitButton.disabled = false;
       submitButton.textContent = defaultButtonText;
-    } finally {
-      clearTimeout(timeout);
     }
   });
 </script>
