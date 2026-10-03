@@ -6,8 +6,6 @@
  */
 
 export const BPO_PLACEHOLDERS = {
-  // PLACEHOLDER: fake CNPJ. Replace with the real one.
-  cnpj: '00.000.000/0001-00',
   // PLACEHOLDER: fake WhatsApp number (display only, it is not linked anywhere).
   whatsappDisplay: '(00) 00000-0000',
   // PLACEHOLDER: provisional legal pages under /bpo. Point these to the final
@@ -18,7 +16,8 @@ export const BPO_PLACEHOLDERS = {
 
 export const BPO_CONTACT = {
   supportEmail: 'suporte@lumoai.com.br',
-  companyName: 'Lumo Tecnologia Ltda.',
+  companyName: 'ZARPO SERVIÇOS DE TECNOLOGIA LTDA.',
+  cnpj: '45.460.498/0001-03',
 } as const;
 
 /**
