@@ -6,8 +6,6 @@
  */
 
 export const BPO_PLACEHOLDERS = {
-  // PLACEHOLDER: fake WhatsApp number (display only, it is not linked anywhere).
-  whatsappDisplay: '(00) 00000-0000',
   // PLACEHOLDER: provisional legal pages under /bpo. Point these to the final
   // pages (or replace the page contents) when the real texts exist.
   privacyUrl: '/bpo/privacidade',

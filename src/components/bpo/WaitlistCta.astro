@@ -44,7 +44,7 @@ const labelClass = 'block text-sm font-medium text-white mb-2';
         </div>
         <div>
           <label for="wl-whatsapp" class={labelClass}>WhatsApp</label>
-          <input id="wl-whatsapp" name="whatsapp" type="tel" required autocomplete="tel" inputmode="tel" maxlength="24" placeholder="(11) 91234-5678" class={inputClass} />
+          <input id="wl-whatsapp" name="whatsapp" type="tel" required autocomplete="tel" inputmode="tel" maxlength="24" placeholder="DDD + número" class={inputClass} />
         </div>
         <div>
           <label for="wl-empresa" class={labelClass}>Empresa</label>
@@ -182,7 +182,7 @@ const labelClass = 'block text-sm font-medium text-white mb-2';
 
     if (!nome) return showError('Informe seu nome.', form.elements.namedItem('nome') as HTMLElement);
     if (!emailRegex.test(email)) return showError('Informe um e-mail válido.', form.elements.namedItem('email') as HTMLElement);
-    if (!whatsapp) return showError('Informe um WhatsApp válido com DDD, por exemplo (11) 91234-5678.', form.elements.namedItem('whatsapp') as HTMLElement);
+    if (!whatsapp) return showError('Informe um WhatsApp válido com DDD.', form.elements.namedItem('whatsapp') as HTMLElement);
     if (!empresa) return showError('Informe o nome da empresa.', form.elements.namedItem('empresa') as HTMLElement);
     if (!volume) return showError('Escolha quantos lançamentos por mês você tem.');
 
