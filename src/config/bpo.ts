@@ -16,8 +16,7 @@ export const BPO_PLACEHOLDERS = {
 
 export const BPO_CONTACT = {
   supportEmail: 'suporte@lumoai.com.br',
-  companyName: 'ZARPO SERVIÇOS DE TECNOLOGIA LTDA.',
-  cnpj: '45.460.498/0001-03',
+  brandName: 'Lumo',
 } as const;
 
 /**
